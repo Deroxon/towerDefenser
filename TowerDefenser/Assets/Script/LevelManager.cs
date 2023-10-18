@@ -12,6 +12,8 @@ public class LevelManager : MonoBehaviour
     [SerializeField]
     private CameraMovement cameraMovement;
 
+    public Dictionary<Point, TileScript> Tiles { get; set; }
+
     public float TileSize {
         get
         { // we taking the prefabs from the gameobject LevelManger for example "grass", "stone way" etc
@@ -33,8 +35,13 @@ public class LevelManager : MonoBehaviour
         
     }
 
+
+
     private void CreateLevel()
     {
+
+        Tiles = new Dictionary<Point, TileScript>();
+
         string[] mapData = ReadLevelText();
         
         // taking first element and making it into char array - example = [0,0,0,0] and taking length of it
@@ -53,27 +60,36 @@ public class LevelManager : MonoBehaviour
 
             for (int x = 0; x < mapX; x++) {
 
-                // Places the tiles int he world
-              maxTile =  PlaceTile(newTiles[x].ToString(),  x,y, worldStart);
+                // Places the tiles in the world
+              PlaceTile(newTiles[x].ToString(),  x,y, worldStart);
             }
 
 
         }
+        // last position of tiles
+        maxTile= Tiles[new Point(mapX-1, mapY-1)].transform.position;
+
+        
         cameraMovement.SetLimits(new Vector3(maxTile.x + TileSize, maxTile.y -TileSize) ); // executing camera movement and feeding it by last value of maxTile
 
     }
 
 
-    private Vector3 PlaceTile(string tileType, int x, int y, Vector3 worldStart)
+    private void PlaceTile(string tileType, int x, int y, Vector3 worldStart)
     {
         // "1" == 1
         int tileIndex = int.Parse(tileType);
 
 
-        GameObject newTile = Instantiate(tilePrefabs[tileIndex]);
-        newTile.transform.position = new Vector3(worldStart.x + (TileSize * x), worldStart.y - (TileSize * y), 0);
+        TileScript newTile = Instantiate(tilePrefabs[tileIndex]).GetComponent<TileScript>();
 
-        return newTile.transform.position;
+        // we passing an refernce to Setup and creating a new point with transforming an position
+        newTile.Setup(new Point(x, y), new Vector3(worldStart.x + (TileSize * x), worldStart.y - (TileSize * y), 0));
+
+        // every new tiles is added to our TIles dictionary 
+        Tiles.Add(new Point(x, y), newTile );
+
+        
     }
 
     public string[] ReadLevelText()
