@@ -14,6 +14,11 @@ public class LevelManager : MonoBehaviour
 
     public Dictionary<Point, TileScript> Tiles { get; set; }
 
+    private Point GreenSpawn, PurpleSpawn;
+
+    [SerializeField]
+    private GameObject GreenPortal, PurplePortal;
+
     public float TileSize {
         get
         { // we taking the prefabs from the gameobject LevelManger for example "grass", "stone way" etc
@@ -72,6 +77,8 @@ public class LevelManager : MonoBehaviour
         
         cameraMovement.SetLimits(new Vector3(maxTile.x + TileSize, maxTile.y -TileSize) ); // executing camera movement and feeding it by last value of maxTile
 
+        SpawnPortals();
+
     }
 
 
@@ -102,6 +109,18 @@ public class LevelManager : MonoBehaviour
 
 
         return data.Split("-");
+    }
+
+    private void SpawnPortals()
+    {
+        GreenSpawn = new Point(0, 0);
+        PurpleSpawn = new Point(21, 9);
+        
+
+        // spawning portal on first Tile using Tiles and tranform it into position, quaternion means  no rotation
+        Instantiate(GreenPortal, Tiles[GreenSpawn].GetComponent<TileScript>().WorldPosition, Quaternion.identity);
+
+        Instantiate(PurplePortal, Tiles[PurpleSpawn].GetComponent<TileScript>().WorldPosition, Quaternion.identity);
     }
 
 }
