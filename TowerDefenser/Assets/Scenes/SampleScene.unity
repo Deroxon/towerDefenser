@@ -262,6 +262,8 @@ MonoBehaviour:
   - {fileID: 5988788530435678300, guid: f02e63206c55d86418c194d07ff6152d, type: 3}
   - {fileID: 6507802506367166016, guid: fa1e6eb1908bde44f8ca30d055ee17bc, type: 3}
   cameraMovement: {fileID: 519420033}
+  GreenPortal: {fileID: 4543270312501613351, guid: 7b552b61303a3b94086bf41cdb6d1652, type: 3}
+  PurplePortal: {fileID: 6942222903251395218, guid: 708d4b610e7716b47aa1f7cd6fd6eba4, type: 3}
 --- !u!4 &1603926513
 Transform:
   m_ObjectHideFlags: 0
