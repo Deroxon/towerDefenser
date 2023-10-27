@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class LevelManager : MonoBehaviour
+public class LevelManager : Singleton<LevelManager> 
 {
 
     [SerializeField]
@@ -11,6 +11,9 @@ public class LevelManager : MonoBehaviour
 
     [SerializeField]
     private CameraMovement cameraMovement;
+
+    [SerializeField]
+    private Transform map;
 
     public Dictionary<Point, TileScript> Tiles { get; set; }
 
@@ -91,10 +94,7 @@ public class LevelManager : MonoBehaviour
         TileScript newTile = Instantiate(tilePrefabs[tileIndex]).GetComponent<TileScript>();
 
         // we passing an refernce to Setup and creating a new point with transforming an position
-        newTile.Setup(new Point(x, y), new Vector3(worldStart.x + (TileSize * x), worldStart.y - (TileSize * y), 0));
-
-        // every new tiles is added to our TIles dictionary 
-        Tiles.Add(new Point(x, y), newTile );
+        newTile.Setup(new Point(x, y), new Vector3(worldStart.x + (TileSize * x), worldStart.y - (TileSize * y), 0), map );
 
         
     }
