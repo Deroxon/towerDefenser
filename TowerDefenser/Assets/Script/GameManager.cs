@@ -6,16 +6,8 @@ public class GameManager : Singleton<GameManager>
 {
 
     // temporary prefab for testing
-    [SerializeField]
-    private GameObject towerPrefab;
+    public TowerButton ClickedBtn { get; private set; }
 
-    public GameObject TowerPrefab { 
-        
-        get {
-            return towerPrefab;
-        } 
-    
-    }
 
     // Start is called before the first frame update
     void Start()
@@ -27,5 +19,18 @@ public class GameManager : Singleton<GameManager>
     void Update()
     {
         
+    }
+
+
+    public void PickTower(TowerButton towerBtn)
+    {
+        this.ClickedBtn = towerBtn;
+        Hover.Instance.Activate(towerBtn.Sprite);
+    }
+
+    public void BuyTower()
+    {
+        // reseting clicked button to null ~ avoid to place few times in a row 
+        ClickedBtn = null; 
     }
 }

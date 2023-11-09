@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class TileScript : MonoBehaviour
 {
@@ -40,14 +41,37 @@ public class TileScript : MonoBehaviour
 
     private void OnMouseOver()
     {
-       if(Input.GetMouseButtonDown(0))
+
+        // only execute if mouse isnt on gameobject, like buttton &&if there is no clickedButton
+        if (!EventSystem.current.IsPointerOverGameObject() && GameManager.Instance.ClickedBtn != null)
         {
-            PlaceTower();
+            if (Input.GetMouseButtonDown(0))
+            {
+                PlaceTower();
+            }
         }
+
+     
     }
 
     private void PlaceTower()
     {
-        Instantiate(GameManager.Instance.TowerPrefab, transform.position, Quaternion.identity);
+
+        GameObject tower = Instantiate(GameManager.Instance.ClickedBtn.TowerPrefab, transform.position, Quaternion.identity);
+
+        // making it that the towers from botttom will hover the towers from top
+        tower.GetComponent<SpriteRenderer>().sortingOrder = GridPosition.Y;
+
+        // setting the tower parent (tile)
+        tower.transform.SetParent(transform);
+
+        // deactivate hover 
+        Hover.Instance.Deactivate();
+
+
+        GameManager.Instance.BuyTower();
+
+
+
     }
 }

@@ -96,7 +96,8 @@ public class LevelManager : Singleton<LevelManager>
         // we passing an refernce to Setup and creating a new point with transforming an position
         newTile.Setup(new Point(x, y), new Vector3(worldStart.x + (TileSize * x), worldStart.y - (TileSize * y), 0), map );
 
-        
+        // making it that the towers will cover the tiles
+        newTile.GetComponent<SpriteRenderer>().sortingOrder = -1;
     }
 
     public string[] ReadLevelText()
