@@ -23,10 +23,16 @@ public class Hover : Singleton<Hover>
 
     private void FollowMouse()
     {
-        transform.position =Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        // when spriteRender is enabled
+        if(spriteRenderer.enabled)
+        {
 
-        // z position to 0
-        transform.position =  new Vector3(transform.position.x, transform.position.y, 0);
+            transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+            // z position to 0
+            transform.position = new Vector3(transform.position.x, transform.position.y, 0);
+        }
+
     }
 
     public void Activate(Sprite sprite)
@@ -38,5 +44,6 @@ public class Hover : Singleton<Hover>
     public void Deactivate()
     {
         spriteRenderer.enabled = false;
+        GameManager.Instance.ClickedBtn = null;
     }
 }

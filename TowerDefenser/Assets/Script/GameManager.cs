@@ -6,7 +6,7 @@ public class GameManager : Singleton<GameManager>
 {
 
     // temporary prefab for testing
-    public TowerButton ClickedBtn { get; private set; }
+    public TowerButton ClickedBtn { get;  set; }
 
 
     // Start is called before the first frame update
@@ -18,7 +18,7 @@ public class GameManager : Singleton<GameManager>
     // Update is called once per frame
     void Update()
     {
-        
+        HandleEscape();
     }
 
 
@@ -30,7 +30,14 @@ public class GameManager : Singleton<GameManager>
 
     public void BuyTower()
     {
-        // reseting clicked button to null ~ avoid to place few times in a row 
-        ClickedBtn = null; 
+        // deactivate hover 
+        Hover.Instance.Deactivate();
+    }
+    private void HandleEscape()
+    {
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            Hover.Instance.Deactivate();
+        }
     }
 }
