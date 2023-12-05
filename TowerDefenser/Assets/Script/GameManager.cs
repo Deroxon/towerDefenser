@@ -35,7 +35,7 @@ public class GameManager : Singleton<GameManager>
     void Start()
     {
         // 100 = value ^^^
-        Currency = 100;
+        Currency = 5;
     }
 
     // Update is called once per frame
@@ -47,14 +47,24 @@ public class GameManager : Singleton<GameManager>
 
     public void PickTower(TowerButton towerBtn)
     {
-        this.ClickedBtn = towerBtn;
-        Hover.Instance.Activate(towerBtn.Sprite);
+        if(Currency >= towerBtn.Price)
+        {
+            this.ClickedBtn = towerBtn;
+            Hover.Instance.Activate(towerBtn.Sprite);
+        }
+
+        
     }
 
     public void BuyTower()
     {
-        // deactivate hover 
-        Hover.Instance.Deactivate();
+        if(Currency >= ClickedBtn.Price)
+        {
+            Currency -= ClickedBtn.Price;
+            // deactivate hover 
+            Hover.Instance.Deactivate();
+        }
+       
     }
     private void HandleEscape()
     {

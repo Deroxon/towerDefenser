@@ -271,6 +271,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   towerPrefab: {fileID: 0}
   sprite: {fileID: 0}
+  price: 10
+  priceTxt: {fileID: 2090928623}
 --- !u!1 &130286508
 GameObject:
   m_ObjectHideFlags: 0
@@ -395,8 +397,8 @@ GameObject:
   - component: {fileID: 434489476}
   - component: {fileID: 434489479}
   - component: {fileID: 434489478}
-  - component: {fileID: 434489477}
   - component: {fileID: 434489480}
+  - component: {fileID: 434489477}
   m_Layer: 5
   m_Name: TreeTower
   m_TagString: Untagged
@@ -532,6 +534,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   towerPrefab: {fileID: 3806512791389933045, guid: 599dc4218c26cee4cb8e85635eb2e65a, type: 3}
   sprite: {fileID: 1680845280, guid: e6abef8bd4de0eb4eab2db8882f4ccfc, type: 3}
+  price: 2
+  priceTxt: {fileID: 549455987}
 --- !u!1 &475763092
 GameObject:
   m_ObjectHideFlags: 0
@@ -680,6 +684,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   towerPrefab: {fileID: 0}
   sprite: {fileID: 0}
+  price: 20
+  priceTxt: {fileID: 1538170999}
 --- !u!1 &478331175
 GameObject:
   m_ObjectHideFlags: 0
@@ -1525,6 +1531,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   towerPrefab: {fileID: 0}
   sprite: {fileID: 0}
+  price: 5
+  priceTxt: {fileID: 1945435520}
 --- !u!1 &1945435515
 GameObject:
   m_ObjectHideFlags: 0
